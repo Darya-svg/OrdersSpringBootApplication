@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<form action="#" th:action="@{/manufact/manufact-update}" th:object="${manufactory}" method = "post">
+    <table>
+
+        <tr>
+            <td><label for="idManufact">ID</label></td>
+            <td> <input type = "text" th:field="*{idManufact}" id="idManufact" placeholder="ID"></td>
+            <td th:errors="*{idManufact}" th:if="${#fields.hasErrors('idManufact')}"></td>
+        </tr>
+        <tr>
+            <td><label for="nameManufact">Manufactory name</label></td>
+            <td> <input type = "text" th:field="*{nameManufact}" id="nameManufact" placeholder="Name"></td>
+            <td th:errors="*{nameManufact}" th:if="${#fields.hasErrors('nameManufact')}"></td>
+        </tr>
+
+
+        <tr>
+            <td><label for="addressManufact">Address manufactoty</label></td>
+            <td> <input type = "text" th:field="*{addressManufact}" id="addressManufact"  placeholder="Address"></td>
+            <td th:errors="*{addressManufact}" th:if="${#fields.hasErrors('addressManufact')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="pay">Pay</label></td>
+            <td> <input type = "text" th:field="*{pay}" id="pay" placeholder="Amount"></td>
+            <td th:errors="*{pay}" th:if="${#fields.hasErrors('pay')}"></td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Update a manufactory">
+
+
+</form>
+</body>
+</html>

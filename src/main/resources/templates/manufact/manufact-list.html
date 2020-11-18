@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<div th:switch = "${manufactory}">
+    <h2 th:case="null">No manufactories found</h2>
+    <div th:case="*">
+        <h2>Manufactories</h2>
+        <table border = "1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name of manufactory</th>
+                <th>Address of manufactory</th>
+                <th>Pay</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="manufact : ${manufactory}">
+                <td th:text="${manufact.idManufact}"></td>
+                <td th:text="${manufact.nameManufact}"></td>
+                <td th:text="${manufact.addressManufact}"></td>
+                <td th:text="${manufact.pay}"></td>
+
+
+                <td><a th:href="@{manufact/manufact-update/{idManufact}(idManufact=${manufact.idManufact})}"><button>Edit</button></a></td>
+                <td><a th:href="@{manufact/manufact-delete/{idManufact}(idManufact=${manufact.idManufact})}"><button>Delete</button></a></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <p><a href="manufact/manufact-create"><button>Create a manufact</button></a> </p>
+
+</div>
+</body>
+</html>

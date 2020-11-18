@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Orders</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<h1>Create an order</h1>
+<form action="#" th:action="@{/order/order-create}" th:object="${order}" method="post">
+
+    <table>
+        <tr>
+            <td><label>Date</label></td>
+            <td><input  type="text" th:field="*{dateOrder}"></td>
+            <td th:errors="*{dateOrder}" th:if="${#fields.hasErrors('dateOrder')}"></td>
+        </tr>
+
+        <tr>
+            <td><label>Manufactory</label></td>
+            <td>
+                <select  name="manufact" th:field="*{manufact}">>
+                    <option th:each="manuf: ${manufactory}"
+                            th:text="${manuf.nameManufact}"
+                            th:value="${manuf.idManufact}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Shop</label></td>
+            <td>
+                <select name="shop" th:field="*{shop}">>
+                    <option th:each="sh : ${shop}"
+                            th:text="${sh.nameShop}"
+                            th:value="${sh.idShop}"></option>
+                </select>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td><label>Product</label></td>
+            <td>
+                <select name="product" th:field="*{product}">>
+                    <option th:each="prod : ${product}"
+                            th:text="${prod.nameProduct}"
+                            th:value="${prod.idProduct}"></option>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td><label>Amount</label></td>
+            <td><input  type="number" th:field="*{amount}"></td>
+            <td th:errors="*{amount}" th:if="${#fields.hasErrors('amount')}"></td>
+        </tr>
+        <tr>
+            <td><label>Cost</label></td>
+            <td><input  type="number" th:field="*{cost}"></td>
+            <td th:errors="*{cost}" th:if="${#fields.hasErrors('cost')}"></td>
+        </tr>
+        <tr>
+            <td><label>Commis</label></td>
+            <td><input  type="number" th:field="*{commis}"></td>
+            <td th:errors="*{commis}" th:if="${#fields.hasErrors('commis')}"></td>
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Create an order">
+
+
+</form>
+</body>
+</html>

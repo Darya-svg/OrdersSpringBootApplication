@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+<div th:if="${message}">
+    <h3 th:text="${message}"/>
+</div>
+
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<form action="#" th:action="@{/registration}" th:object="${registr}" method = "post">
+    <table>
+        <tr>
+            <td><label for="username">Username:</label></td>
+            <td> <input type = "text" th:field="*{username}" id="username" placeholder="username"></td>
+            <td th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="password">Password:</label></td>
+            <td> <input type = "text" th:field="*{password}" id="password" placeholder="password"></td>
+            <td th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="confirmPassword">Confirm password:</label></td>
+            <td> <input type = "text" th:field="*{confirmPassword}" id="confirmPassword" placeholder="confirmPassword"></td>
+            <td th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}"></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Register"/>
+</form>
+</body>
+</html>
+
+
+

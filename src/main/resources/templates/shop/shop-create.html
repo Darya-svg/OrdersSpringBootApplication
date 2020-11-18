@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<form action="#" th:action="@{/shop/shop-create}" th:object="${shop}" method = "post">
+
+    <table>
+        <tr>
+            <td><label for="nameShop">Shop name</label></td>
+            <td> <input type = "text" th:field="*{nameShop}" id="nameShop" placeholder="Name"></td>
+            <td th:errors="*{nameShop}" th:if="${#fields.hasErrors('nameShop')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="addressShop">Address shop</label></td>
+            <td> <input type = "text" th:field="*{addressShop}" id="addressShop"  placeholder="Address"></td>
+            <td th:errors="*{addressShop}" th:if="${#fields.hasErrors('addressShop')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="privilege">Privilege</label></td>
+            <td> <input type = "text" th:field="*{privilege}" id="privilege" placeholder="privilege"></td>
+            <td th:errors="*{privilege}" th:if="${#fields.hasErrors('privilege')}"></td>
+
+        </tr>
+
+
+
+    </table>
+
+    <input type="submit" value="Create a shop"/>
+
+
+
+
+</form>
+</body>
+</html>

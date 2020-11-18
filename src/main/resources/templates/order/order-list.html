@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<div th:switch = "${order}">
+    <h2 th:case="null">No orders found</h2>
+    <div th:case="*">
+        <h2>All orders</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Manufactory</th>
+                <th>Shop</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Cost</th>
+                <th>Commis</th>
+
+            </tr>
+            </thead>
+            <tbody >
+            <tr th:each="ord : ${order}">
+                <td th:text="${ord.idOrder}"></td>
+                <td th:text="${ord.dateOrder}"></td>
+                <td th:text="${ord.manufact.nameManufact}"></td>
+                <td th:text="${ord.shop.nameShop}"></td>
+                <td th:text="${ord.product.nameProduct}"></td>
+                <td  th:text="${ord.amount}" ></td>
+                <td  th:text="${ord.cost}" ></td>
+                <td  th:text="${ord.commis}" ></td>
+                <td><a th:href="@{order/order-update/{idOrder}(idOrder=${ord.idOrder})}"><button>Edit</button></a></td>
+                <td><a th:href="@{order/order-delete/{idOrder}(idOrder=${ord.idOrder})}"><button>Delete</button></a></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <p><a href="order/order-create"><button>Create a new order</button></a> </p>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<h2>Welcome!</h2>
+
+
+<!-- Все фабрики -->
+<input id="ManufactButton" type = "button" value = "All ateliers" style="height:25px; width: 75px"/>
+<table id = "manufact" style="display: none" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>ADDRESS</th>
+        <th>PAY</th>
+        <th colspan="2">ACTIONS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="manufact : ${manufactory}">
+        <td th:text="${manufact.idManufact}"></td>
+        <td th:text="${manufact.nameManufact}"></td>
+        <td th:text="${manufact.addressManufact}"></td>
+        <td th:text="${manufact.pay}"></td>
+        <td><a th:href="@{manufact/manufact-update/{idManufact}(idManufact=${manufact.idManufact})}"><button>Edit</button></a></td>
+        <td><a th:href="@{manufact/manufact-delete/{idManufact}(idManufact=${manufact.idManufact})}"><button>Delete</button></a></td>
+    </tr>
+    </tbody>
+    <a href="manufact/manufact-create"><button>Add a new atelier</button></a>
+</table>
+
+
+<p></p>
+
+
+<!-- Все магазины -->
+<input id="ShopButton" type = "button" value = "All shops"/>
+<table id = "shop" style="display: none" >
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>ADDRESS</th>
+        <th>BENEFIT</th>
+        <th colspan="2">ACTIONS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sh : ${shop}">
+        <td th:text="${sh.idShop}"></td>
+        <td th:text="${sh.nameShop}"></td>
+        <td th:text="${sh.addressShop}"></td>
+        <td th:text="${sh.privilege}"></td>
+        <td><a th:href="@{shop/shop-update/{idShop}(idShop=${sh.idShop})}"><button>Edit</button></a></td>
+        <td><a th:href="@{shop/shop-delete/{idShop}(idShop=${sh.idShop})}"><button>Delete</button></a></td>
+    </tr>
+    <a href="shop/shop-create"><button>Add a new shop</button></a>
+    </tbody>
+</table>
+
+
+<p></p>
+
+
+<!-- Все продукты -->
+<input id="ProductButton" type = "button" value = "All products"/>
+<table id = "product" style="display: none" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRICE</th>
+        <th>ADDRESS_STOCK</th>
+        <th>MAX_AMOUNT</th>
+        <th>LAST_DATE</th>
+        <th colspan="2">ACTIONS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prod : ${product}">
+        <td th:text="${prod.idProduct}"></td>
+        <td th:text="${prod.nameProduct}"></td>
+        <td th:text="${prod.price}"></td>
+        <td th:text="${prod.addressStock}"></td>
+        <td th:text="${prod.maxAmount}"></td>
+        <td th:text="${prod.lastDate}"></td>
+        <td><a th:href="@{product/product-update/{idProduct}(idProduct=${prod.idProduct})}"><button>Edit</button></a></td>
+        <td><a th:href="@{product/product-delete/{idProduct}(idProduct=${prod.idProduct})}"><button>Delete</button></a></td>
+    </tr>
+    </tbody>
+    <a href="product/product-create"><button>Add a new product</button></a>
+</table>
+
+
+<p></p>
+
+<!-- Все заказы -->
+
+<input id="OrderButton" type = "button" value = "All orders"/>
+<table id = "order" style="display: none" >
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>DATE</th>
+        <th>ATELIE</th>
+        <th>SHOP</th>
+        <th>PRODUCT</th>
+        <th>AMOUNT</th>
+        <th>COST</th>
+        <th>COMMIS</th>
+        <th colspan="2">ACTIONS</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="ord : ${order}">
+        <td th:text="${ord.idOrder}"></td>
+        <td th:text="${ord.dateOrder}"></td>
+        <td th:text="${ord.manufact.nameManufact}"></td>
+        <td th:text="${ord.shop.nameShop}"></td>
+        <td th:text="${ord.product.nameProduct}"></td>
+        <td th:text="${ord.amount}" align="center"></td>
+        <td th:text="${ord.cost}" ></td>
+        <td th:text="${ord.commis}" ></td>
+        <td><a th:href="@{order/order-update/{idOrder}(idOrder=${ord.idOrder})}"><button>Edit</button></a></td>
+        <td><a th:href="@{order/order-delete/{idOrder}(idOrder=${ord.idOrder})}"><button>Delete</button></a></td>
+    </tr>
+    </tbody>
+</table>
+<a href="order/order-create"><button>Add a new order</button></a>
+
+
+<p></p>
+
+<h3>You can see the orders for the selected atelier</h3>
+<h3>Choose atelier:</h3>
+
+<!-- выпадающий список -->
+<form action="#" id="sendManufact"  th:action="@{/order/sendManufact}" th:object="${manufactory}" method="post">
+
+    <select name="idManufact">
+        <option th:each="manuf: ${manufactory}"
+                th:text="${manuf.nameManufact}"
+                th:value="${manuf.idManufact}"></option>
+    </select>
+
+<input id="SelectedOrdersButton" type="submit"  value="Show orders">
+</form>
+
+<!-- таблица заказов определенного ателье-->
+
+
+<script>
+
+        document.getElementById("ShopButton").addEventListener("click",function (button){
+            if(document.getElementById("shop").style.display ==="none")
+                document.getElementById("shop").style.display = "block";
+              else document.getElementById("shop").style.display = "none";
+        });
+
+        document.getElementById("ProductButton").addEventListener("click",function (button){
+            if(document.getElementById("product").style.display ==="none")
+                document.getElementById("product").style.display = "block";
+            else document.getElementById("product").style.display = "none";
+        });
+
+        document.getElementById("ManufactButton").addEventListener("click",function (button){
+            if(document.getElementById("manufact").style.display ==="none")
+                document.getElementById("manufact").style.display = "block";
+            else document.getElementById("manufact").style.display = "none";
+        });
+
+        document.getElementById("OrderButton").addEventListener("click",function (button){
+            if(document.getElementById("order").style.display ==="none")
+                document.getElementById("order").style.display = "block";
+            else document.getElementById("order").style.display = "none";
+        });
+
+        document.getElementById("SelectedOrdersButton").addEventListener("click",function (button){
+            if(document.getElementById("headerTable").style.display ==="none")
+                document.getElementById("headerTable").style.display = "block";
+            else document.getElementById("headerTable").style.display = "none";
+        });
+
+</script>
+
+
+
+
+</body>
+</html>

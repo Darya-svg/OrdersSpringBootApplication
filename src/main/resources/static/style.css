@@ -1,0 +1,39 @@
+
+table {
+    overflow:hidden;
+    background:#fefefe;
+}
+
+th, td {
+    padding:2px 12px 2px;
+    text-align:center;
+}
+
+th {
+    padding-top:22px;
+    text-shadow: 1px 1px 1px #fff;
+    background:#e8eaeb;
+}
+
+td {
+    border-top:1px solid #e0e0e0;
+    border-right:1px solid #e0e0e0;
+}
+
+tr.odd-row td {
+    background:#f6f6f6;
+}
+
+td.first, th.first {
+    text-align:left
+}
+
+td.last {
+    border-right:none;
+}
+
+tbody tr:hover {
+    background: #F5F5F5	;
+}
+
+

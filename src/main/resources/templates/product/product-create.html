@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<form action="#" th:action="@{/product/product-create}" th:object="${product}" method = "post">
+
+    <table>
+        <tr>
+            <td><label for="nameProduct">Product name</label></td>
+            <td> <input type = "text" th:field="*{nameProduct}" id="nameProduct" placeholder="Name"></td>
+            <td th:errors="*{nameProduct}" th:if="${#fields.hasErrors('nameProduct')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="price">Price</label></td>
+            <td> <input type = "text" th:field="*{price}" id="price" placeholder="Price"></td>
+            <td th:errors="*{price}" th:if="${#fields.hasErrors('price')}"></td>
+
+        </tr>
+
+
+        <tr>
+            <td><label for="addressStock">Address stock</label></td>
+            <td> <input type = "text" th:field="*{addressStock}" id="addressStock"  placeholder="Address"></td>
+            <td th:errors="*{addressStock}" th:if="${#fields.hasErrors('addressStock')}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="maxAmount">Max amount</label></td>
+            <td> <input type = "text" th:field="*{maxAmount}" id="maxAmount" placeholder="maxAmount"></td>
+            <td th:errors="*{maxAmount}" th:if="${#fields.hasErrors('maxAmount')}"></td>
+
+        </tr>
+
+        <tr>
+            <td><label for="lastDate">Last day of order</label></td>
+            <td> <input type = "text" th:field="*{lastDate}" id="lastDate" placeholder="lastDate"></td>
+            <td th:errors="*{lastDate}" th:if="${#fields.hasErrors('lastDate')}"></td>
+
+        </tr>
+
+    </table>
+
+    <input type="submit" value="Create a product"/>
+
+
+
+
+</form>
+</body>
+</html>
